@@ -1,0 +1,16 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <h4>Author's Name: {{ author.first_name }}, {{ author.last_name }}</h4>
+
+    <p style="font-size:18px; margin-top:30px; margin-bottom:0;"><strong>Books</strong><br>
+    <div style="margin-top:5px;">
+    {% for book in author.book_set.all %}
+        <a href="{{ book.get_absolute_url }}">{{ book }}</a> - {{ book.bookinstance_set.all.count }} cop{{ book.bookinstance_set.all|pluralize:"y,ies" }}<br>
+        [Summary]
+        <p>{{ book.summary }}</p>
+        {% if not forloop.last %}<br> {% endif %}
+
+    {% endfor %}</p>
+
+{% endblock %}
